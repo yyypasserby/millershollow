@@ -3,12 +3,16 @@
 
 type User @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   roles: [Role!]! @relation(name: "UserRoles")
 }
 
 type Role @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
   roleName: String!
   state: Int!
   user: User! @relation(name: "UserRoles")
@@ -17,6 +21,11 @@ type Role @model {
 
 type Game @model {
   id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  password: String!
+  isPublic: Boolean!
   state: Int!
   day: Int!
   roles: [Role!]! @relation(name: "RoleGames")
