@@ -1,8 +1,5 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "My Graphcool Service",
-  "dependencies": {
-    "react-router-native": "^4.3.0"
-  }
+  "description": "My Graphcool Service"
 }
