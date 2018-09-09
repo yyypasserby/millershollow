@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import {
   QueryRenderer,
@@ -23,18 +24,20 @@ const GameListViewQuery = graphql`
 class GameListView extends React.Component {
   render() {
     return (
-      <QueryRenderer
-        environment={environment}
-        query={GameListViewQuery}
-        render={({error, props}) => {
-          if (error) {
-            return <Text>Error loading Game List: {error.message}</Text>;
-          } else if (props) {
-            return <GameList viewer={props.viewer} />;
-          }
-          return <ActivityIndicator style={styles.indicator} />;
-        }}
-      />
+      <View>
+        <QueryRenderer
+          environment={environment}
+          query={GameListViewQuery}
+          render={({error, props}) => {
+            if (error) {
+              return <Text>Error loading Game List: {error.message}</Text>;
+            } else if (props) {
+              return <GameList viewer={props.viewer} />;
+            }
+            return <ActivityIndicator style={styles.indicator} />;
+          }}
+        />
+      </View>
     );
   }
 }
