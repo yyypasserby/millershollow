@@ -1,0 +1,24 @@
+# The following types define the data model of the example service
+# based on which the GraphQL API is generated
+
+type User @model {
+  id: ID! @isUnique
+  name: String!
+  roles: [Role!]! @relation(name: "UserRoles")
+}
+
+type Role @model {
+  id: ID! @isUnique
+  roleName: String!
+  state: Int!
+  user: User! @relation(name: "UserRoles")
+  game: Game! @relation(name: "RoleGames")
+}
+
+type Game @model {
+  id: ID! @isUnique
+  state: Int!
+  day: Int!
+  roles: [Role!]! @relation(name: "RoleGames")
+}
+
