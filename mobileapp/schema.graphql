@@ -1,0 +1,1032 @@
+type AddToRoleGamesPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  rolesRole: Role
+  gameGame: Game
+  rolesRoleEdge: RoleEdge
+  gameGameEdge: GameEdge
+}
+
+input AddToRoleGamesRoleInput {
+  gameGameId: ID!
+  rolesRoleId: ID!
+  clientMutationId: String!
+}
+
+type AddToUserRolesPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  userUser: User
+  rolesRole: Role
+  userUserEdge: UserEdge
+  rolesRoleEdge: RoleEdge
+}
+
+input AddToUserRolesUserInput {
+  rolesRoleId: ID!
+  userUserId: ID!
+  clientMutationId: String!
+}
+
+input CreateGame {
+  day: Int!
+  isPublic: Boolean!
+  name: String!
+  password: String!
+  state: Int!
+  rolesIds: [ID!]
+  roles: [GamerolesRole!]
+}
+
+input CreateGameInput {
+  day: Int!
+  isPublic: Boolean!
+  name: String!
+  password: String!
+  state: Int!
+  rolesIds: [ID!]
+  roles: [GamerolesRole!]
+  clientMutationId: String!
+}
+
+type CreateGamePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  game: Game
+  edge: GameEdge
+}
+
+input CreateRole {
+  roleName: String!
+  state: Int!
+  gameId: ID
+  game: RolegameGame
+  userId: ID
+  user: RoleuserUser
+}
+
+input CreateRoleInput {
+  roleName: String!
+  state: Int!
+  gameId: ID
+  game: RolegameGame
+  userId: ID
+  user: RoleuserUser
+  clientMutationId: String!
+}
+
+type CreateRolePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  role: Role
+  edge: RoleEdge
+  game: Game
+  user: User
+}
+
+input CreateUser {
+  name: String!
+  rolesIds: [ID!]
+  roles: [UserrolesRole!]
+}
+
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+scalar DateTime
+
+input DeleteGameInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteGamePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  game: Game
+  edge: GameEdge
+  deletedId: ID
+}
+
+input DeleteRoleInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteRolePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  role: Role
+  edge: RoleEdge
+  game: Game
+  user: User
+  deletedId: ID
+}
+
+input DeleteUserInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+  deletedId: ID
+}
+
+type Game implements Node {
+  createdAt: DateTime!
+  day: Int!
+  id: ID!
+  isPublic: Boolean!
+  name: String!
+  password: String!
+  roles(filter: RoleFilter, orderBy: RoleOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection
+  state: Int!
+  updatedAt: DateTime!
+}
+
+# A connection to a list of items.
+type GameConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [GameEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type GameEdge {
+  # The item at the end of the edge.
+  node: Game!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input GameFilter {
+  # Logical AND on all given filters.
+  AND: [GameFilter!]
+
+  # Logical OR on all given filters.
+  OR: [GameFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  day: Int
+
+  # All values that are not equal to given value.
+  day_not: Int
+
+  # All values that are contained in given list.
+  day_in: [Int!]
+
+  # All values that are not contained in given list.
+  day_not_in: [Int!]
+
+  # All values less than the given value.
+  day_lt: Int
+
+  # All values less than or equal the given value.
+  day_lte: Int
+
+  # All values greater than the given value.
+  day_gt: Int
+
+  # All values greater than or equal the given value.
+  day_gte: Int
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  isPublic: Boolean
+
+  # All values that are not equal to given value.
+  isPublic_not: Boolean
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  password: String
+
+  # All values that are not equal to given value.
+  password_not: String
+
+  # All values that are contained in given list.
+  password_in: [String!]
+
+  # All values that are not contained in given list.
+  password_not_in: [String!]
+
+  # All values less than the given value.
+  password_lt: String
+
+  # All values less than or equal the given value.
+  password_lte: String
+
+  # All values greater than the given value.
+  password_gt: String
+
+  # All values greater than or equal the given value.
+  password_gte: String
+
+  # All values containing the given string.
+  password_contains: String
+
+  # All values not containing the given string.
+  password_not_contains: String
+
+  # All values starting with the given string.
+  password_starts_with: String
+
+  # All values not starting with the given string.
+  password_not_starts_with: String
+
+  # All values ending with the given string.
+  password_ends_with: String
+
+  # All values not ending with the given string.
+  password_not_ends_with: String
+  state: Int
+
+  # All values that are not equal to given value.
+  state_not: Int
+
+  # All values that are contained in given list.
+  state_in: [Int!]
+
+  # All values that are not contained in given list.
+  state_not_in: [Int!]
+
+  # All values less than the given value.
+  state_lt: Int
+
+  # All values less than or equal the given value.
+  state_lte: Int
+
+  # All values greater than the given value.
+  state_gt: Int
+
+  # All values greater than or equal the given value.
+  state_gte: Int
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  roles_every: RoleFilter
+  roles_some: RoleFilter
+  roles_none: RoleFilter
+}
+
+enum GameOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  day_ASC
+  day_DESC
+  id_ASC
+  id_DESC
+  isPublic_ASC
+  isPublic_DESC
+  name_ASC
+  name_DESC
+  password_ASC
+  password_DESC
+  state_ASC
+  state_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input GamerolesRole {
+  roleName: String!
+  state: Int!
+  userId: ID
+  user: RoleuserUser
+}
+
+# HelloPayload
+type HelloPayload {
+  message: String!
+}
+
+input InvokeFunctionInput {
+  name: String!
+  input: String!
+  clientMutationId: String
+}
+
+type InvokeFunctionPayload {
+  result: String!
+  clientMutationId: String
+}
+
+type Mutation {
+  createGame(input: CreateGameInput!): CreateGamePayload
+  createRole(input: CreateRoleInput!): CreateRolePayload
+  updateGame(input: UpdateGameInput!): UpdateGamePayload
+  updateRole(input: UpdateRoleInput!): UpdateRolePayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateGame(input: UpdateOrCreateGameInput!): UpdateOrCreateGamePayload
+  updateOrCreateRole(input: UpdateOrCreateRoleInput!): UpdateOrCreateRolePayload
+  updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteGame(input: DeleteGameInput!): DeleteGamePayload
+  deleteRole(input: DeleteRoleInput!): DeleteRolePayload
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  addToRoleGames(input: AddToRoleGamesRoleInput!): AddToRoleGamesPayload
+  addToUserRoles(input: AddToUserRolesUserInput!): AddToUserRolesPayload
+  createUser(input: SignupUserInput!): CreateUserPayload!
+  invokeFunction(input: InvokeFunctionInput!): InvokeFunctionPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+type Role implements Node {
+  createdAt: DateTime!
+  game(filter: GameFilter): Game!
+  id: ID!
+  roleName: String!
+  state: Int!
+  updatedAt: DateTime!
+  user(filter: UserFilter): User!
+}
+
+# A connection to a list of items.
+type RoleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [RoleEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type RoleEdge {
+  # The item at the end of the edge.
+  node: Role!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input RoleFilter {
+  # Logical AND on all given filters.
+  AND: [RoleFilter!]
+
+  # Logical OR on all given filters.
+  OR: [RoleFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  roleName: String
+
+  # All values that are not equal to given value.
+  roleName_not: String
+
+  # All values that are contained in given list.
+  roleName_in: [String!]
+
+  # All values that are not contained in given list.
+  roleName_not_in: [String!]
+
+  # All values less than the given value.
+  roleName_lt: String
+
+  # All values less than or equal the given value.
+  roleName_lte: String
+
+  # All values greater than the given value.
+  roleName_gt: String
+
+  # All values greater than or equal the given value.
+  roleName_gte: String
+
+  # All values containing the given string.
+  roleName_contains: String
+
+  # All values not containing the given string.
+  roleName_not_contains: String
+
+  # All values starting with the given string.
+  roleName_starts_with: String
+
+  # All values not starting with the given string.
+  roleName_not_starts_with: String
+
+  # All values ending with the given string.
+  roleName_ends_with: String
+
+  # All values not ending with the given string.
+  roleName_not_ends_with: String
+  state: Int
+
+  # All values that are not equal to given value.
+  state_not: Int
+
+  # All values that are contained in given list.
+  state_in: [Int!]
+
+  # All values that are not contained in given list.
+  state_not_in: [Int!]
+
+  # All values less than the given value.
+  state_lt: Int
+
+  # All values less than or equal the given value.
+  state_lte: Int
+
+  # All values greater than the given value.
+  state_gt: Int
+
+  # All values greater than or equal the given value.
+  state_gte: Int
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  game: GameFilter
+  user: UserFilter
+}
+
+input RolegameGame {
+  day: Int!
+  isPublic: Boolean!
+  name: String!
+  password: String!
+  state: Int!
+  rolesIds: [ID!]
+  roles: [GamerolesRole!]
+}
+
+enum RoleOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  roleName_ASC
+  roleName_DESC
+  state_ASC
+  state_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input RoleuserUser {
+  name: String!
+  rolesIds: [ID!]
+  roles: [UserrolesRole!]
+}
+
+input SignupUserInput {
+  name: String!
+  rolesIds: [ID!]
+  roles: [UserrolesRole!]
+  clientMutationId: String!
+}
+
+input UpdateGame {
+  day: Int
+  id: ID!
+  isPublic: Boolean
+  name: String
+  password: String
+  state: Int
+  rolesIds: [ID!]
+  roles: [GamerolesRole!]
+}
+
+input UpdateGameInput {
+  day: Int
+  id: ID!
+  isPublic: Boolean
+  name: String
+  password: String
+  state: Int
+  rolesIds: [ID!]
+  roles: [GamerolesRole!]
+  clientMutationId: String!
+}
+
+type UpdateGamePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  game: Game
+  edge: GameEdge
+}
+
+input UpdateOrCreateGameInput {
+  update: UpdateGame!
+  create: CreateGame!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateGamePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  game: Game
+  edge: GameEdge
+}
+
+input UpdateOrCreateRoleInput {
+  update: UpdateRole!
+  create: CreateRole!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateRolePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  role: Role
+  edge: RoleEdge
+  game: Game
+  user: User
+}
+
+input UpdateOrCreateUserInput {
+  update: UpdateUser!
+  create: CreateUser!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+input UpdateRole {
+  id: ID!
+  roleName: String
+  state: Int
+  gameId: ID
+  game: RolegameGame
+  userId: ID
+  user: RoleuserUser
+}
+
+input UpdateRoleInput {
+  id: ID!
+  roleName: String
+  state: Int
+  gameId: ID
+  game: RolegameGame
+  userId: ID
+  user: RoleuserUser
+  clientMutationId: String!
+}
+
+type UpdateRolePayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  role: Role
+  edge: RoleEdge
+  game: Game
+  user: User
+}
+
+input UpdateUser {
+  id: ID!
+  name: String
+  rolesIds: [ID!]
+  roles: [UserrolesRole!]
+}
+
+input UpdateUserInput {
+  id: ID!
+  name: String
+  rolesIds: [ID!]
+  roles: [UserrolesRole!]
+  clientMutationId: String!
+}
+
+type UpdateUserPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  user: User
+  edge: UserEdge
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  roles(filter: RoleFilter, orderBy: RoleOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection
+  updatedAt: DateTime!
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input UserFilter {
+  # Logical AND on all given filters.
+  AND: [UserFilter!]
+
+  # Logical OR on all given filters.
+  OR: [UserFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
+  roles_every: RoleFilter
+  roles_some: RoleFilter
+  roles_none: RoleFilter
+}
+
+enum UserOrderBy {
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+input UserrolesRole {
+  roleName: String!
+  state: Int!
+  gameId: ID
+  game: RolegameGame
+}
+
+# This is the famous Relay viewer object
+type Viewer {
+  allGames(filter: GameFilter, orderBy: GameOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): GameConnection!
+  allRoles(filter: RoleFilter, orderBy: RoleOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
+  allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user: User
+  Game(id: ID): Game
+  Role(id: ID): Role
+  User(id: ID): User
+
+  # hello
+  hello(name: String): HelloPayload
+  id: ID!
+}
+
