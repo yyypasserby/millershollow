@@ -27,22 +27,37 @@ const TABS = [
   {
     title: 'Game',
     path: '/',
+    icon: {
+      name: 'gamepad',
+    },
   },
   {
     title: 'Message',
     path: '/message',
+    icon: {
+      name: 'comments',
+    },
   },
   {
     title: 'Create Game',
     path: '/createGame',
+    icon: {
+      name: 'plus-circle',
+    },
   },
   {
     title: 'Notification',
     path: '/notification',
+    icon: {
+      name: 'bell',
+    },
   },
   {
     title: 'Account',
     path: '/account',
+    icon: {
+      name: 'user',
+    },
   },
 ];
 

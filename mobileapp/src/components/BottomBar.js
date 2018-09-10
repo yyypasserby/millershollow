@@ -5,6 +5,9 @@ import {
   View,
 } from 'react-native';
 import {
+  Icon,
+} from 'react-native-elements';
+import {
   Link,
 } from 'react-router-native';
 
@@ -24,7 +27,13 @@ class BottomBar extends React.Component {
             style={styles.bottomBarItem}
             to={tab.path}
             underlayColor={COLOR_SECONDARY}>
-            <Text style={styles.text}>{tab.title}</Text>
+            <View>
+              <Icon
+                type='font-awesome'
+                name={tab.icon.name}
+                color={COLOR_FONT_PRIMARY} />
+              <Text style={styles.text}>{tab.title}</Text>
+            </View>
           </Link>
         )}
       </View>
@@ -46,6 +55,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLOR_FONT_PRIMARY,
+    fontSize: 10,
   }
 });
 
