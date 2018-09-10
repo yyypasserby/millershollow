@@ -7,6 +7,7 @@ import {
 import FlashMessage from 'react-native-flash-message';
 import {
   Route,
+  Switch,
 } from 'react-router-native';
 
 import {
@@ -19,6 +20,8 @@ import BottomBar from './components/BottomBar';
 import AccountView from './components/AccountView';
 import CreateGameView from './components/CreateGameView';
 import GameListView from './components/GameListView';
+import MessageView from './components/MessageView';
+import NotificationView from './components/NotificationView';
 
 const TABS = [
   {
@@ -26,8 +29,16 @@ const TABS = [
     path: '/',
   },
   {
+    title: 'Message',
+    path: '/message',
+  },
+  {
     title: 'Create Game',
     path: '/createGame',
+  },
+  {
+    title: 'Notification',
+    path: '/notification',
   },
   {
     title: 'Account',
@@ -41,9 +52,13 @@ class MainView extends React.Component {
       <SafeAreaView style={styles.container}>
         <FlashMessage position='top' />
         <View style={styles.tabView}>
-          <Route exact path={TABS[0].path} component={GameListView} />
-          <Route path={TABS[1].path} component={CreateGameView} />
-          <Route path={TABS[2].path} component={AccountView} />
+          <Switch>
+            <Route exact path={TABS[0].path} component={GameListView} />
+            <Route path={TABS[1].path} component={MessageView} />
+            <Route path={TABS[2].path} component={CreateGameView} />
+            <Route path={TABS[3].path} component={NotificationView} />
+            <Route path={TABS[4].path} component={AccountView} />
+          </Switch>
         </View>
         <BottomBar style={styles.bottomBar} tabs={TABS}/>
       </SafeAreaView>

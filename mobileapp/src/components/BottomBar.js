@@ -11,6 +11,7 @@ import {
 import {
   COLOR_FONT_PRIMARY,
   COLOR_PRIMARY,
+  COLOR_SECONDARY,
 } from '../Constants';
 
 class BottomBar extends React.Component {
@@ -21,7 +22,8 @@ class BottomBar extends React.Component {
           <Link
             key={tab.title}
             style={styles.bottomBarItem}
-            to={tab.path}>
+            to={tab.path}
+            underlayColor={COLOR_SECONDARY}>
             <Text style={styles.text}>{tab.title}</Text>
           </Link>
         )}

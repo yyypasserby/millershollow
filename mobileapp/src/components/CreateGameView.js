@@ -1,12 +1,15 @@
 import React from 'react';
 import {
   Text,
+  View,
 } from 'react-native';
 
 class CreateGameView extends React.Component {
   render() {
     return (
-      <Text>CreateGameView</Text>
+      <View>
+        <Text>CreateGameView</Text>
+      </View>
     );
   }
 }

@@ -4,14 +4,14 @@ import {
   View,
 } from 'react-native';
 
-class AccountView extends React.Component {
+class MessageView extends React.Component {
   render() {
     return (
       <View>
-        <Text>AccountView</Text>
+        <Text>MessageView</Text>
       </View>
     );
   }
 }
 
-export default AccountView;
+export default MessageView;
