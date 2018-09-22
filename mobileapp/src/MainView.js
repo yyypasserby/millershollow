@@ -5,11 +5,10 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import FlashMessage from 'react-native-flash-message';
 import {
-  Route,
-  Switch,
-} from 'react-router-native';
+  Icon,
+} from 'react-native-elements';
+import { createBottomTabNavigator } from 'react-navigation';
 
 import {
   COLOR_BACKGROUND,
@@ -17,13 +16,11 @@ import {
   COLOR_PRIMARY,
 } from './Constants';
 
-import BottomBar from './components/BottomBar';
 import AccountView from './components/AccountView';
 import CreateGameView from './components/CreateGameView';
 import GameListView from './components/GameListView';
 import MessageView from './components/MessageView';
 import NotificationView from './components/NotificationView';
-import MHSafeAreaView from './components/MHSafeAreaView';
 
 const TABS = [
   {
@@ -68,41 +65,6 @@ const TABS = [
   },
 ];
 
-class MainView extends React.Component {
-  state = {
-    createGameViewVisible: false,
-  }
-
-  render() {
-    return (
-      <MHSafeAreaView>
-        <FlashMessage position='top' />
-        <View style={styles.tabView}>
-          <Switch>
-            <Route exact path={TABS[0].path} component={GameListView} />
-            <Route path={TABS[1].path} component={MessageView} />
-            <Route path={TABS[3].path} component={NotificationView} />
-            <Route path={TABS[4].path} component={AccountView} />
-          </Switch>
-        </View>
-        <CreateGameView
-          onClose={() => this._toggleCreateGameView(false)}
-          visible={this.state.createGameViewVisible}
-        />
-        <BottomBar
-          style={styles.bottomBar}
-          tabs={TABS}
-          onCTAPress={() => this._toggleCreateGameView(true)}
-        />
-      </MHSafeAreaView>
-    );
-  }
-
-  _toggleCreateGameView = (visible) => {
-    this.setState({createGameViewVisible: visible});
-  };
-}
-
 const styles = StyleSheet.create({
   header: {
     backgroundColor: COLOR_PRIMARY,
@@ -110,9 +72,77 @@ const styles = StyleSheet.create({
     fontSize: 24,
     padding: 10,
   },
-  tabView: {
-    flex: 1,
-  },
 });
 
-export default MainView;
+export default createBottomTabNavigator({
+  Game: {
+    path: '/gamelist',
+    screen: GameListView,
+    navigationOptions: () => ({
+      title: 'Game',
+      tabBarIcon: ({tintColor}) => (
+        <Icon
+          type='font-awesome'
+          name='gamepad'
+          color={tintColor}
+        />
+      )
+    }),
+  },
+  Message: {
+    path: '/message',
+    screen: MessageView,
+    navigationOptions: () => ({
+      title: 'Message',
+      tabBarIcon: ({tintColor}) => (
+        <Icon
+          type='font-awesome'
+          name='comments'
+          color={tintColor}
+        />
+      )
+    }),
+  },
+  CreateGame: {
+    path: '/createGame',
+    screen: CreateGameView,
+    navigationOptions: () => ({
+      title: 'Create',
+      tabBarIcon: ({tintColor}) => (
+        <Icon
+          type='font-awesome'
+          name='plus-circle'
+          color={tintColor}
+        />
+      )
+    }),
+  },
+  Notification: {
+    path: '/notification',
+    screen: NotificationView,
+    navigationOptions: () => ({
+      title: 'Notification',
+      tabBarIcon: ({tintColor}) => (
+        <Icon
+          type='font-awesome'
+          name='bell'
+          color={tintColor}
+        />
+      )
+    }),
+  },
+  Account: {
+    path: '/account',
+    screen: AccountView,
+    navigationOptions: () => ({
+      title: 'Account',
+      tabBarIcon: ({tintColor}) => (
+        <Icon
+          type='font-awesome'
+          name='user'
+          color={tintColor}
+        />
+      )
+    }),
+  },
+});

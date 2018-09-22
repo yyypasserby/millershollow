@@ -8,9 +8,6 @@ import {
 import {
   Icon,
 } from 'react-native-elements';
-import {
-  withRouter,
-} from 'react-router-native';
 
 import {
   COLOR_FONT_PRIMARY,
